@@ -88,6 +88,12 @@ def select_best_token_contrastive(high_prob_tokens, amateur_model, current_input
     """Select the best token using batched evaluation."""
     if not high_prob_tokens:
         return None
+
+    if len(high_prob_tokens) == 1:
+        best_token_id = high_prob_tokens[0][0]
+        if (testing):
+            print("Only one token to choose")
+        return best_token_id
     
     # extract token IDs for batch processing
     token_ids = [token[0] for token in high_prob_tokens]
